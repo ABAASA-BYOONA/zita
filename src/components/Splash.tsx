@@ -12,7 +12,8 @@ export const Splash = ({ className = "", rotate = 0, flip = false }: SplashProps
     alt=""
     aria-hidden="true"
     loading="lazy"
-    className={`pointer-events-none select-none absolute ${className}`}
+    /* Added 'grayscale opacity-25' to cleanly transform the yellow asset into a gray element */
+    className={`pointer-events-none select-none absolute grayscale opacity-25 ${className}`}
     style={{
       transform: `rotate(${rotate}deg) ${flip ? "scaleX(-1)" : ""}`,
     }}
