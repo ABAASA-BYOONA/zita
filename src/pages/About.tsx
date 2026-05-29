@@ -7,12 +7,19 @@ const About = () => (
   <div className="min-h-screen bg-background overflow-x-hidden">
     <Nav />
 
+    {/* HERO SECTION */}
     <section className="relative px-6 md:px-12 pt-8 pb-16">
       <Splash className="top-10 -right-10 w-72" rotate={120} />
       <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 items-center relative z-10">
         <div className="lg:col-span-5">
           <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-ink">
-            <img src={portrait} alt="Aber Zita Lourdes" width={896} height={1024} className="w-full h-full object-cover" />
+            <img 
+              src={portrait} 
+              alt="Aber Zita Lourdes" 
+              width={896} 
+              height={1024} 
+              className="w-full h-full object-cover" 
+            />
           </div>
         </div>
         <div className="lg:col-span-7">
@@ -30,7 +37,7 @@ const About = () => (
       </div>
     </section>
 
-    {/* PHILOSOPHY */}
+    {/* PHILOSOPHY SECTION */}
     <section className="relative bg-ink text-ink-foreground px-6 md:px-12 py-24 my-12 rounded-t-[3rem] md:mx-6 overflow-hidden">
       <Splash className="-top-10 -left-10 w-72" rotate={-20} />
       <Splash className="-bottom-16 right-0 w-80" rotate={150} />
@@ -44,16 +51,16 @@ const About = () => (
             They tell stories that words can't express. Every design gives a story its voice, information turned into a visual experience.
           </p>
           <p>
-            My portfolio is rooted in intentional observation  capturing stories and using graphic design to create impact. I don't just create visuals. I build stories and make impact through photography and graphics design.
+            My portfolio is rooted in intentional observation, capturing stories and using graphic design to create impact. I don't just create visuals; I build stories and make an impact through photography and graphic design.
           </p>
           <p className="text-ink-foreground font-medium">
-            As a person driven by a passion for sustainability and community impact, I approach design not just as an aesthetic pursuit, but as a problem-solving too.
+            As a person driven by a passion for sustainability and community impact, I approach design not just as an aesthetic pursuit, but as a problem-solving tool.
           </p>
         </div>
       </div>
     </section>
 
-    {/* TOOLBOX */}
+    {/* TOOLBOX, SERVICES & EDUCATION SECTION */}
     <section className="px-6 md:px-12 py-24">
       <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
         <div>
