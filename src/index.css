@@ -6,7 +6,7 @@
 
 /* 
    Aber Zita Lourdes — Portfolio design system.
-   Dark navy + lemon green, chunky display + clean sans body.
+   Dark navy + sophisticated gray, chunky display + clean sans body.
    All colors MUST be HSL. 
 */
 
@@ -19,7 +19,7 @@
     --ink: 218 38% 13%;                  /* dark navy block #161f30 */
     --ink-foreground: 220 24% 97%;
 
-    --lime: 90 71% 55%;                  /* lemon green #84d031 */
+    --lime: 220 10% 70%;                 /* Clean medium-light gray */
     --lime-foreground: 218 38% 13%;
 
     --card: 0 0% 100%;
@@ -37,7 +37,7 @@
     --muted: 220 18% 90%;
     --muted-foreground: 218 15% 40%;
 
-    --accent: 90 71% 55%;
+    --accent: 220 10% 70%;               /* Matched gray accent */
     --accent-foreground: 218 38% 13%;
 
     --destructive: 0 84.2% 60.2%;
@@ -45,7 +45,7 @@
 
     --border: 220 16% 86%;
     --input: 220 16% 86%;
-    --ring: 90 71% 55%;
+    --ring: 220 10% 70%;                 /* Gray focus ring */
 
     --radius: 1rem;
 
