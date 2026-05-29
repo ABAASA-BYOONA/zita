@@ -25,7 +25,7 @@ const About = () => (
         <div className="lg:col-span-7">
           <p className="uppercase tracking-[0.3em] text-xs text-muted-foreground mb-4">About</p>
           <h1 className="font-display text-5xl md:text-7xl font-extrabold leading-[0.9] mb-8">
-            hi, i'm<br />zita<span className="text-lime">.</span>
+            hi, i'm<br />zita<span className="text-muted-foreground/60">.</span>
           </h1>
           <p className="text-lg leading-relaxed text-muted-foreground mb-5">
             I'm Aber Zita Lourdes — a graduate in Bachelors of Visual Communication, Design and Multimedia. I am passionate about creating visuals and photography that not only look good but tell stories.
@@ -42,9 +42,9 @@ const About = () => (
       <Splash className="-top-10 -left-10 w-72" rotate={-20} />
       <Splash className="-bottom-16 right-0 w-80" rotate={150} />
       <div className="max-w-4xl mx-auto relative z-10">
-        <p className="uppercase tracking-[0.3em] text-xs text-lime mb-6">My philosophy</p>
+        <p className="uppercase tracking-[0.3em] text-xs text-muted-foreground/80 mb-6">My philosophy</p>
         <h2 className="font-display text-4xl md:text-6xl font-extrabold leading-[0.95] mb-10">
-          powerful images<br />are not staged —<br />they're <span className="text-lime">discovered</span>.
+          powerful images<br />are not staged —<br />they're <span className="text-muted-foreground/40 text-stroke-ink">discovered</span>.
         </h2>
         <div className="space-y-5 text-lg text-ink-foreground/80 leading-relaxed">
           <p>
