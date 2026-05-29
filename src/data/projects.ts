@@ -1,33 +1,42 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getProject } from "@/data/projects"; // Adjust path to your data file
+import { getProject } from "@/data/projects";
 
 export const ProjectDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const project = getProject(slug || "");
+  // Decode the slug in case it has URL encoded spaces (%20) from your data file
+  const project = getProject(slug ? decodeURIComponent(slug) : "");
 
   // State to manage full-screen modal gallery indices
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
 
   if (!project) {
-    return <div className="p-12 text-center text-muted-foreground">Project not found.</div>;
+    return (
+      <div className="p-12 text-center text-muted-foreground min-h-screen flex flex-col items-center justify-center gap-4">
+        <p>Project not found.</p>
+        <Link to="/" className="text-sm underline">Return Home</Link>
+      </div>
+    );
   }
+
+  // Ensure gallery always defaults to an array to prevent .length runtime crashes
+  const gallery = project.gallery || [];
 
   // Navigation handlers for the fullscreen lightbox modal
   const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Stops modal from closing unexpectedly
-    if (activeImageIndex !== null) {
+    e.stopPropagation(); 
+    if (activeImageIndex !== null && gallery.length > 0) {
       setActiveImageIndex((prev) => 
-        prev === 0 ? project.gallery.length - 1 : (prev ?? 0) - 1
+        prev === 0 ? gallery.length - 1 : (prev ?? 0) - 1
       );
     }
   };
 
   const handleNext = (e: React.MouseEvent) => {
     e.stopPropagation(); 
-    if (activeImageIndex !== null) {
+    if (activeImageIndex !== null && gallery.length > 0) {
       setActiveImageIndex((prev) => 
-        prev === project.gallery.length - 1 ? 0 : (prev ?? 0) + 1
+        prev === gallery.length - 1 ? 0 : (prev ?? 0) + 1
       );
     }
   };
@@ -45,7 +54,7 @@ export const ProjectDetail = () => {
 
       {/* GRID GALLERY */}
       <main className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {project.gallery.map((imgUrl, index) => (
+        {gallery.map((imgUrl, index) => (
           <div 
             key={index}
             onClick={() => setActiveImageIndex(index)}
@@ -53,20 +62,19 @@ export const ProjectDetail = () => {
           >
             <img 
               src={imgUrl} 
-              alt={`${project.title} gallery asset ${index + 1}`}
+              alt={`${project.title} asset ${index + 1}`}
               loading="lazy"
-              /* 'object-contain' keeps the original aspect ratio without slicing off edges */
               className="w-full h-full object-contain p-2 group-hover:scale-[1.02] transition-transform duration-300"
             />
           </div>
         ))}
       </main>
 
-      {/* LIGHTBOX MODAL (TAP & SCROLL BACKGROUND FOREGROUND LAYER) */}
-      {activeImageIndex !== null && (
+      {/* LIGHTBOX MODAL */}
+      {activeImageIndex !== null && gallery.length > 0 && (
         <div 
           onClick={() => setActiveImageIndex(null)}
-          className="fixed inset-0 bg-ink/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm select-none animate-in fade-in duration-200"
+          className="fixed inset-0 bg-ink/95 z-50 flex items-center justify-center p-4 backdrop-blur-sm select-none"
         >
           {/* Close Area */}
           <button 
@@ -80,7 +88,7 @@ export const ProjectDetail = () => {
           {/* Left Arrow */}
           <button
             onClick={handlePrev}
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center text-xl transition-all z-50"
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center text-xl z-50"
             aria-label="Previous image"
           >
             ‹
@@ -89,20 +97,20 @@ export const ProjectDetail = () => {
           {/* Main Focused Display Image Container */}
           <div className="max-w-5xl max-h-[85vh] w-full h-full flex flex-col items-center justify-center relative">
             <img 
-              src={project.gallery[activeImageIndex]} 
-              alt="Fullscreen interactive view"
-              className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl transition-all duration-300"
+              src={gallery[activeImageIndex]} 
+              alt="Fullscreen view"
+              className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
             />
             {/* Image Counter Badge */}
             <p className="text-white/60 text-xs mt-4 tracking-widest uppercase">
-              {activeImageIndex + 1} / {project.gallery.length}
+              {activeImageIndex + 1} / {gallery.length}
             </p>
           </div>
 
           {/* Right Arrow */}
           <button
             onClick={handleNext}
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center text-xl transition-all z-50"
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 text-white rounded-full flex items-center justify-center text-xl z-50"
             aria-label="Next image"
           >
             ›
