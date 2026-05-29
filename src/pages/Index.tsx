@@ -4,7 +4,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Splash } from "@/components/Splash";
 import { Button } from "@/components/ui/button";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/portrait.png";
 import { projects } from "@/data/projects";
 
 const Index = () => {
