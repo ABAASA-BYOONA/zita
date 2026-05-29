@@ -1,7 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Splash } from "@/components/Splash";
-import portrait from "@/assets/portrait.jpg";
+import portrait from "@/assets/portrait.png";
 
 const About = () => (
   <div className="min-h-screen bg-background overflow-x-hidden">
