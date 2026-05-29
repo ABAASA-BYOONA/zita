@@ -44,10 +44,10 @@ const About = () => (
             They tell stories that words can't express. Every design gives a story its voice, information turned into a visual experience.
           </p>
           <p>
-            My portfolio is rooted in intentional observation — capturing stories and using graphic design to create impact.
+            My portfolio is rooted in intentional observation  capturing stories and using graphic design to create impact. I don't just create visuals. I build stories and make impact through photography and graphics design.
           </p>
           <p className="text-ink-foreground font-medium">
-            I don't just create visuals. I build stories and make impact through photography and design.
+            As a person driven by a passion for sustainability and community impact, I approach design not just as an aesthetic pursuit, but as a problem-solving too.
           </p>
         </div>
       </div>
