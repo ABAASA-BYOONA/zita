@@ -1,236 +1,48 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useParams, Navigate } from "react-router-dom";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
-import { Splash } from "@/components/Splash";
-import { getProject, projects } from "@/data/projects";
-import { ArrowLeft, ArrowRight, X, ChevronLeft, ChevronRight } from "lucide-react";
+import wildlife from "@/assets/proj-wildlife.jpg";
+import branding from "@/assets/proj-branding.jpg";
+import comic from "@/assets/proj-comic.jpg";
+import travel from "@/assets/proj-travel.jpg";
+import themed from "@/assets/proj-themed.jpg";
+import uiux from "@/assets/proj-uiux.jpg";
 
-const ProjectDetail = () => {
-  const { slug } = useParams();
-  const project = getProject(slug ? decodeURIComponent(slug) : "");
-  if (!project) return <Navigate to="/work" replace />;
+export interface Project {
+  slug: string;
+  title: string;
+  category: string;
+  year: string;
+  cover: string;
+  summary: string;
+  brief: string;
+  role: string[];
+  gallery: string[];
+  quote: { text: string; author?: string };
+}
 
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+export const projects: Project[] = [
+  {
+    slug: "XALANI CANDLES",
+    title: "XALANI CANDLES",
+    category: "Branding and print",
+    year: "2026",
+    cover: "/x1.jpg",
+    summary: "Literally great for house decor, jewelry, beads and more.",
+    brief: "Living a simple life full of art",
+    role: ["Branding"],
+    gallery: ["/x1.jpg","/x2.jpg","/x3.jpg","/x4.jpg","/x5.jpg","/x6.jpg","/x7.jpg","/x8.jpg","/x9.jpg","/x10.jpg","/x11.jpg","/x12.jpg","/x13.jpg","/x14.jpg","/x15.jpg","/x16.jpg"],
+    quote: { text: "Zita has the rare patience to wait for the picture instead of taking it.", author: "Editor, Field Notes Magazine" },
+  },
+  {
+    slug: "PEARL OF EXPERIENCE",
+    title: "PEARL OF EXPERIENCE",
+    category: "WEB DESIGN",
+    year: "2026",
+    cover: "/1.jpg",
+    summary: "From wildlife safaris to culinary adventures — we craft unforgettable journeys.",
+    brief: "",
+    role: ["Web Development"],
+    gallery: ["/1.jpg","/2.jpg","/3.jpg","/4.jpg","/5.jpg","/6.jpg","/7.jpg","/8.jpg","/9.jpg","/10.jpg","/11.jpg"],
+    quote: { text: "Let us be your guide." },
+  },
+];
 
-  const gallery = project.gallery || [];
-  const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
-  const idx = projects.findIndex((p) => p.slug === project.slug);
-  const next = projects[(idx + 1) % projects.length];
-
-  const openLightbox = (i: number) => setLightboxIndex(i);
-  const closeLightbox = () => setLightboxIndex(null);
-
-  const goPrev = useCallback((e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    setLightboxIndex((prev) =>
-      prev === null ? null : prev === 0 ? gallery.length - 1 : prev - 1
-    );
-  }, [gallery.length]);
-
-  const goNext = useCallback((e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    setLightboxIndex((prev) =>
-      prev === null ? null : prev === gallery.length - 1 ? 0 : prev + 1
-    );
-  }, [gallery.length]);
-
-  // Keyboard navigation
-  useEffect(() => {
-    if (lightboxIndex === null) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
-      if (e.key === "Escape") closeLightbox();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [lightboxIndex, goPrev, goNext]);
-
-  // Prevent body scroll when lightbox is open
-  useEffect(() => {
-    document.body.style.overflow = lightboxIndex !== null ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [lightboxIndex]);
-
-  return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
-      <Nav />
-
-      {/* HERO */}
-      <section className="px-6 md:px-12 pt-4 pb-12">
-        <div className="max-w-6xl mx-auto">
-          <Link to="/work" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8">
-            <ArrowLeft className="h-4 w-4" /> All work
-          </Link>
-          <div className="relative aspect-[16/8] rounded-[2.5rem] overflow-hidden bg-ink">
-            <img
-              src={project.cover}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-            <Splash className="-top-10 -right-10 w-56" rotate={140} />
-          </div>
-          <div className="mt-8 flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="uppercase tracking-[0.3em] text-xs text-muted-foreground mb-3">
-                {project.category} · {project.year}
-              </p>
-              <h1 className="font-display text-5xl md:text-7xl font-extrabold leading-[0.9]">
-                {project.title}<span className="text-lime">.</span>
-              </h1>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {project.role.map((r) => (
-                <span key={r} className="px-4 py-2 rounded-full bg-ink text-ink-foreground text-xs uppercase tracking-widest">
-                  {r}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BRIEF */}
-      <section className="px-6 md:px-12 py-12">
-        <div className="max-w-4xl mx-auto grid md:grid-cols-3 gap-10">
-          <h2 className="font-display text-3xl font-extrabold">
-            About<br />the project<span className="text-lime">.</span>
-          </h2>
-          <p className="md:col-span-2 text-lg text-muted-foreground leading-relaxed">
-            {project.brief || project.summary}
-          </p>
-        </div>
-      </section>
-
-      {/* GALLERY GRID */}
-      <section className="px-6 md:px-12 py-12">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
-          {gallery.map((src, i) => (
-            <div
-              key={i}
-              onClick={() => openLightbox(i)}
-              className={`rounded-2xl overflow-hidden bg-muted cursor-pointer group
-                ${i === 0 ? "col-span-2 md:col-span-2 row-span-2 aspect-square" : "aspect-square"}`}
-            >
-              <img
-                src={src}
-                alt={`${project.title} ${i + 1}`}
-                loading="lazy"
-                className="w-full h-full object-contain bg-muted group-hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* QUOTE */}
-      {project.quote?.text && (
-        <section className="px-6 md:px-12 py-16">
-          <div className="max-w-5xl mx-auto bg-ink text-ink-foreground rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden">
-            <Splash className="-bottom-10 -left-10 w-56 opacity-90" rotate={-30} />
-            <div className="relative z-10">
-              <span className="font-display text-7xl text-lime leading-none">"</span>
-              <blockquote className="font-display text-3xl md:text-4xl font-extrabold leading-tight -mt-4">
-                {project.quote.text}
-              </blockquote>
-              {project.quote.author && (
-                <p className="mt-6 text-sm uppercase tracking-widest text-ink-foreground/60">
-                  — {project.quote.author}
-                </p>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* OTHER PROJECTS */}
-      {others.length > 0 && (
-        <section className="px-6 md:px-12 py-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-end justify-between mb-10">
-              <h3 className="font-display text-4xl md:text-5xl font-extrabold">
-                other<br />projects<span className="text-lime">.</span>
-              </h3>
-              <Link to={`/work/${encodeURIComponent(next.slug)}`} className="text-sm font-medium hover:text-lime flex items-center gap-2">
-                Next: {next.title} <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              {others.map((p) => (
-                <Link key={p.slug} to={`/work/${encodeURIComponent(p.slug)}`} className="group">
-                  <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
-                    <img
-                      src={p.cover}
-                      alt={p.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
-                  <div className="mt-3 flex justify-between items-baseline">
-                    <span className="font-display text-xl font-extrabold">{p.title}</span>
-                    <span className="text-xs text-muted-foreground">{p.year}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      <Footer />
-
-      {/* LIGHTBOX */}
-      {lightboxIndex !== null && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
-          onClick={closeLightbox}
-        >
-          {/* Close */}
-          <button
-            onClick={closeLightbox}
-            className="absolute top-5 right-5 z-50 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
-
-          {/* Prev */}
-          <button
-            onClick={goPrev}
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
-            aria-label="Previous"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-
-          {/* Image */}
-          <div
-            className="max-w-5xl w-full px-20 flex flex-col items-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={gallery[lightboxIndex]}
-              alt={`${project.title} ${lightboxIndex + 1}`}
-              className="max-h-[80vh] w-full object-contain rounded-xl shadow-2xl"
-            />
-            <p className="mt-4 text-white/50 text-xs uppercase tracking-widest">
-              {lightboxIndex + 1} / {gallery.length}
-            </p>
-          </div>
-
-          {/* Next */}
-          <button
-            onClick={goNext}
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
-            aria-label="Next"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default ProjectDetail;
+export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
