@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Splash } from "@/components/Splash";
@@ -76,7 +76,6 @@ const Index = () => {
               <div key={s.n} className="group rounded-3xl bg-ink-foreground/[0.04] border border-ink-foreground/10 p-7 hover:bg-lime hover:text-lime-foreground transition-colors">
                 <div className="flex justify-between items-start mb-12">
                   <span className="text-xs tracking-widest opacity-60">{s.n}</span>
-                  <ArrowUpRight className="h-5 w-5 opacity-60 group-hover:opacity-100 transition" />
                 </div>
                 <h3 className="font-display text-3xl font-extrabold mb-3">{s.t}</h3>
                 <p className="text-sm opacity-80 leading-relaxed">{s.d}</p>
