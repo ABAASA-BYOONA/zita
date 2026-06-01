@@ -4,6 +4,16 @@ import comic from "@/assets/proj-comic.jpg";
 import travel from "@/assets/proj-travel.jpg";
 import themed from "@/assets/proj-themed.jpg";
 import uiux from "@/assets/proj-uiux.jpg";
+import p1 from "@/assets/p1.PNG";
+import p2 from "@/assets/p2.PNG";
+import p3 from "@/assets/p3.PNG";
+import p4 from "@/assets/p4.PNG";
+import p5 from "@/assets/p5.PNG";
+import p6 from "@/assets/p6.PNG";
+import p7 from "@/assets/p7.PNG";
+import p8 from "@/assets/p8.PNG";
+import p9 from "@/assets/p9.PNG";
+import p10 from "@/assets/p10.PNG";
 
 export interface Project {
   slug: string;
@@ -42,6 +52,18 @@ export const projects: Project[] = [
     role: ["Web Development"],
     gallery: ["/1.jpg","/2.jpg","/3.jpg","/4.jpg","/5.jpg","/6.jpg","/7.jpg","/8.jpg","/9.jpg","/10.jpg","/11.jpg"],
     quote: { text: "Let us be your guide." },
+  },
+  {
+    slug: "PHOTOGRAPHY",
+    title: "PHOTOGRAPHY",
+    category: "Photography",
+    year: "2026",
+    cover: p1,
+    summary: "A visual journey through light, texture, and the quiet moments in between.",
+    brief: "Capturing the world one frame at a time.",
+    role: ["Photography"],
+    gallery: [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10],
+    quote: { text: "Every photograph is a certificate of presence." },
   },
 ];
 
