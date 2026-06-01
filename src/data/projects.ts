@@ -20,11 +20,11 @@ export interface Project {
   title: string;
   category: string;
   year: string;
-  cover: string;
+  cover: string | any;
   summary: string;
   brief: string;
   role: string[];
-  gallery: string[];
+  gallery: (string | any)[];
   quote: { text: string; author?: string };
 }
 
