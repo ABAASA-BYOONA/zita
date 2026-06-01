@@ -4,16 +4,16 @@ import comic from "@/assets/proj-comic.jpg";
 import travel from "@/assets/proj-travel.jpg";
 import themed from "@/assets/proj-themed.jpg";
 import uiux from "@/assets/proj-uiux.jpg";
-import p1 from "@/assets/p1.PNG";
-import p2 from "@/assets/p2.PNG";
-import p3 from "@/assets/p3.PNG";
-import p4 from "@/assets/p4.PNG";
-import p5 from "@/assets/p5.PNG";
-import p6 from "@/assets/p6.PNG";
-import p7 from "@/assets/p7.PNG";
-import p8 from "@/assets/p8.PNG";
-import p9 from "@/assets/p9.PNG";
-import p10 from "@/assets/p10.PNG";
+import p1 from "@/assets/p1.png";
+import p2 from "@/assets/p2.png";
+import p3 from "@/assets/p3.png";
+import p4 from "@/assets/p4.png";
+import p5 from "@/assets/p5.png";
+import p6 from "@/assets/p6.png";
+import p7 from "@/assets/p7.png";
+import p8 from "@/assets/p8.png";
+import p9 from "@/assets/p9.png";
+import p10 from "@/assets/p10.png";
 
 export interface Project {
   slug: string;
